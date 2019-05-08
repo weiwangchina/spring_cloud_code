@@ -1,0 +1,28 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+    #心跳间隔时间,默认是30秒
+    lease-renewal-interval-in-seconds: 2
+    #最后一次心跳时间后leaseExpirationDurationInSeconds秒就认为是下线了，默认是90秒
+    lease-expiration-duration-in-seconds: 6
+  client:
+  #声明自己是个服务端
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+      #此配置建议只试用开发和测试环境
+      #心跳间隔时间,默认是30秒
+      #org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean.leaseRenewalIntervalInSeconds
+      #eureka.instance.leaseRenewalIntervalInSeconds=2
+      #最后一次心跳时间后leaseExpirationDurationInSeconds秒就认为是下线了，默认是90秒
+      #org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean.leaseExpirationDurationInSeconds
+      #eureka.instance.leaseExpirationDurationInSeconds=6
+
+  server:
+    #使自我保护默认true
+    enable-self-preservation: false
